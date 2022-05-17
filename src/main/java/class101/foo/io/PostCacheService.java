@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 public class PostCacheService {
 
     @Autowired
-    PostRepository postRepository;
+    PostRepositoryRDB postRepositoryRDB;
 
     private Page<Post> firstPostPage;
 
     @Scheduled(cron = "* * * * * *")
     public void updateFirstPostPage(){
-        firstPostPage = postRepository.findAll(
+        firstPostPage = postRepositoryRDB.findAll(
                 PageRequest.of(0, 20, Sort.by("id").descending())
         );
     }

@@ -13,11 +13,11 @@ public class Consumer {
     ObjectMapper objectMapper;
 
     @Autowired
-    PostRepository postRepository;
+    PostRepositoryRDB postRepositoryRDB;
 
     @RabbitListener(queues = "CREATE_POST_QUEUE")
     public void handler(String message) throws JsonProcessingException {
         Post post = objectMapper.readValue(message, Post.class);
-        postRepository.save(post);
+        postRepositoryRDB.save(post);
     }
 }
